@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Raqeeb | Security Operations</title>
+    <link rel="stylesheet" href="ui.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to workspace</a>
+    <div class="app">
+      <nav aria-label="Primary navigation">
+        <div class="logo"><svg class="logo-eye" viewBox="0 0 40 40" aria-hidden="true"><path d="M3.5 20s5.7-10 16.5-10 16.5 10 16.5 10-5.7 10-16.5 10S3.5 20 3.5 20Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="20" r="6.2" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="2.3" fill="var(--gr)"/></svg><div>Raqeeb<span class="brand-tag">SECURITY OPERATIONS</span></div></div>
+        <div class="workspace"><span class="workspace-symbol">&#9671;</span><div><b>Security workspace</b><small>Camera intelligence</small></div></div>
+        <div id="nl"></div>
+        <div class="sys">
+          <div>
+            <span class="dot"></span><b style="color: var(--gr)" id="sysOnlineText">CONNECTING</b>
+          </div>
+          <div id="sysCamsText">Camera sources: connecting?</div>
+          <div><span id="sysAiLabel">AI detector:</span> <b id="aist">OFFLINE</b></div>
+          <div><span id="sysSyncLabel">Last sync:</span> <span class="sy">--</span></div>
+          <div><span id="sysDateLabel">?</span> · <span class="sy">--</span></div>
+        </div>
+      </nav>
+      <div class="mn">
+        <header class="top">
+          <div class="header-context"><span>Workspace /</span><strong id="breadcrumb">Live Monitoring</strong></div>
+          <div class="header-controls">
+          <span class="chip mode-chip" id="modeLabel">RECORDED CAMERAS</span>
+          <button class="chip" id="dm" type="button" onclick="toggleDemo()" aria-label="Toggle demo simulation">Demo: OFF</button>
+          <button class="chip" id="aic" onclick="go('health')" aria-label="View system health">AI: offline</button>
+          <button class="chip" onclick="bell()" aria-label="Notifications"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M9 21h6"/></svg><b id="bc">0</b></button>
+          <button class="chip icon-chip" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">🌙 Dark</button>
+          <button class="chip lang-chip" id="langToggle" type="button" onclick="toggleLang()" aria-label="Toggle language" title="Toggle language">🌐 العربية</button>
+          </div>
+          <div class="search-tools">
+            <div class="search-field">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.3 16.3 4.4 4.4" stroke-linecap="round"/></svg>
+          <input
+            id="q"
+            aria-label="Search people, cameras, and incidents"
+            placeholder="Search Person ID, camera, incident, location, type…"
+            oninput="sq(this.value)"
+          />
+              <kbd class="search-shortcut" aria-hidden="true">/</kbd>
+            </div>
+    <button
+      class="chat-launch"
+      id="chatLaunchBtn"
+      type="button"
+      onclick="toggleChat()"
+      aria-controls="chat"
+      aria-expanded="false"
+    >
+      ◌ AI Assistant
+    </button>
+    <section id="chat" aria-label="AI camera assistant">
+      <div id="chatHead">
+        <div>
+          <b id="chatTitle">AI Camera Assistant</b>
+          <div class="mu" id="chatSub" style="font-size: 11px">Ask about people, incidents, and camera evidence</div>
+        </div>
+        <button
+          class="x"
+          type="button"
+          onclick="toggleChat()"
+          aria-label="Close assistant"
+        >
+          ×
+        </button>
+      </div>
+      <div id="chatLog" aria-live="polite">
+        <div class="chat-msg" id="chatWelcome">
+          Ask about people, clothing, incidents, or evidence in the analyzed camera footage.
+        </div>
+        <button
+          class="chip"
+          id="chatSampleChip"
+          type="button"
+          onclick="chatSearch(currentLang === 'ar' ? 'لخّص الحوادث المفتوحة' : 'Summarize the open incidents')"
+        >
+          Summarize the open incidents
+        </button>
+      </div>
+      <form id="chatForm" onsubmit="submitChat(event)">
+        <input
+          id="chatInput"
+          autocomplete="off"
+          placeholder="Ask a question about the camera footage…"
+          aria-label="Ask about camera footage"
+        />
+        <button class="btn" id="chatSubmitBtn" type="submit" aria-label="Ask">Ask</button>
+      </form>
+    </section>
+          </div>
+        </header>
+        <div id="np" class="card"></div>
+        <main id="main" tabindex="-1"></main>
+      </div>
+    </div>
+    <div id="m" class="ov" onclick="if (event.target == this) closeM();">
+      <div id="mb" class="md"></div>
+    </div>
+    <div id="ts"></div>
+    <script src="dashboard-ui.js"></script>
+    <script src="webcam.js"></script>
+    <script src="site-map-tracking.js"></script>
+    <script src="site-map-3d.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

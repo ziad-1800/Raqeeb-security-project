@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>SentinelOps — Venue Security Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{color-scheme:dark;--bg:#070b14;--card:#0d1424;--c2:#111a2e;--bd:#1b2740;--tx:#e6ecf8;--mu:#7f8db0;--cy:#22d3ee;--gr:#34d399;--am:#fbbf24;--or:#fb923c;--rd:#f43f5e;--bl:#818cf8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:radial-gradient(1200px 500px at 70% -10%,#12325a44,transparent),var(--bg);color:var(--tx);font:14px/1.45 Inter,system-ui,sans-serif}
+.app{display:flex;min-height:100%}
+nav{width:232px;flex:none;position:sticky;top:env(safe-area-inset-top,0px);height:100dvh;background:#0a1020ee;border-right:1px solid var(--bd);display:flex;flex-direction:column;padding:18px 12px}
+.logo{font-weight:700;font-size:16px;padding:4px 10px 16px;display:flex;gap:8px;align-items:center}
+.logo i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--cy),var(--bl))}
+nav a{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:10px;color:var(--mu);cursor:pointer;transition:.2s}
+nav a:hover{background:#ffffff08;color:var(--tx)}nav a.on{background:#22d3ee14;color:var(--cy);box-shadow:inset 2px 0 var(--cy)}
+.sys{margin-top:auto;padding:12px;border:1px solid var(--bd);border-radius:12px;font-size:12px;color:var(--mu);display:grid;gap:5px;background:var(--card)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);margin-right:6px;animation:pu 2s infinite}
+.mn{flex:1;min-width:0;position:relative}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:10px;align-items:center;padding:12px 24px;background:#070b14dd;backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
+.top input{flex:1;max-width:460px;background:var(--card);border:1px solid var(--bd);color:var(--tx);padding:9px 14px;border-radius:10px;outline:0;font:inherit}
+.top input:focus{border-color:var(--cy)}
+.chip{padding:6px 11px;border-radius:99px;border:1px solid var(--bd);font-size:12px;cursor:pointer;background:var(--card);color:var(--mu);white-space:nowrap}
+.chip.on{color:var(--cy);border-color:#22d3ee55}
+main{padding:24px;display:grid;gap:16px}main>*{min-width:0}
+h1{font-size:20px}h2{font-size:15px;margin-bottom:8px}
+.card{background:linear-gradient(180deg,var(--c2),var(--card));border:1px solid var(--bd);border-radius:16px;padding:16px;box-shadow:0 8px 30px #0006}
+.mu{color:var(--mu)}.big{font-size:26px;font-weight:700;display:block}
+.g{display:grid;gap:14px}.st{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.two{grid-template-columns:minmax(0,2fr) minmax(280px,1fr)}
+@media(max-width:1100px){.two{grid-template-columns:1fr}}
+@media(max-width:820px){nav{width:64px}nav a span,.logo span,.sys{display:none}main{padding:14px}.top{padding:10px 14px}}
+.b{font:700 10px Inter,sans-serif;letter-spacing:.05em;padding:3px 8px;border-radius:99px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);white-space:nowrap}
+.al{display:grid;grid-template-columns:4px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--bd);border-radius:12px;background:var(--card);cursor:pointer;transition:.2s}
+.al:hover{transform:translateY(-1px);border-color:var(--c)}.al .ab{align-self:stretch;border-radius:4px;background:var(--c)}
+.al.cr{box-shadow:0 0 0 1px #f43f5e44,0 0 24px #f43f5e22}
+.am{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}
+th{font-size:11px;color:var(--mu);text-align:left;padding:8px 10px;font-weight:600}
+td{padding:10px;border-top:1px solid var(--bd);white-space:nowrap}tr.r{cursor:pointer}tr.r:hover td{background:#ffffff06}
+select{background:var(--c2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:6px 8px;font:inherit}
+.fl{display:flex;gap:8px;flex-wrap:wrap}
+.ov{position:fixed;inset:0;background:#02050ccc;backdrop-filter:blur(4px);display:none;z-index:50;padding:20px;overflow:auto}.ov.on{display:block}
+.md{max-width:920px;margin:0 auto;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:22px;display:grid;gap:16px;animation:in .25s}
+.md.dr{max-width:440px;margin-right:0}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}@keyframes pu{50%{opacity:.4}}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.kv div{background:var(--c2);border:1px solid var(--bd);border-radius:10px;padding:8px 10px}.kv small{display:block;color:var(--mu);font-size:11px}
+.wf{display:flex;gap:6px;overflow-x:auto}.wf div{flex:1;min-width:104px;text-align:center;font-size:11px;padding:8px 4px;border-radius:10px;border:1px solid var(--bd);color:var(--mu)}
+.wf .d{color:var(--gr);border-color:#34d39955}.wf .a{color:var(--cy);border-color:var(--cy);box-shadow:0 0 14px #22d3ee33}
+.tl{border-left:2px solid var(--bd);padding-left:16px;display:grid;gap:12px;margin-left:6px}.tl div{position:relative}
+.tl div:before{content:'';position:absolute;left:-22px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--cy)}
+.btn{background:linear-gradient(135deg,var(--cy),var(--bl));color:#031018;border:0;padding:9px 16px;border-radius:10px;font-weight:600;cursor:pointer}
+.btn.o{background:none;color:var(--tx);border:1px solid var(--bd)}button{font:inherit}
+.x{float:right;cursor:pointer;color:var(--mu);font-size:22px;background:none;border:0}
+#ts{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:80;display:grid;gap:8px}
+#ts div{background:var(--c2);border:1px solid var(--cy);padding:10px 16px;border-radius:10px;animation:in .25s}
+#np{position:absolute;right:24px;top:58px;width:340px;max-width:calc(100vw - 28px);display:none;z-index:30;gap:8px}#np.on{display:grid}
+.nt{padding:10px;border-radius:10px;background:var(--c2);border:1px solid var(--bd);border-left:3px solid var(--c);font-size:13px}.nt.cr{box-shadow:0 0 16px #f43f5e33}
+.ev{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--bd)}.ev.nw{animation:in .5s;background:#22d3ee0c}
+.hb{display:grid;grid-template-columns:120px 1fr 44px;gap:8px;align-items:center;margin:7px 0;font-size:12px}
+.tk{background:#ffffff0d;border-radius:6px;overflow:hidden;display:flex}.tk i{display:block;height:8px;background:var(--c)}
+.pr{animation:rp 1.6s infinite;transform-box:fill-box;transform-origin:center}@keyframes rp{to{transform:scale(2.8);opacity:0}}
+.vb rect:hover{opacity:.7}
+.vid{position:relative;aspect-ratio:16/8;border-radius:12px;overflow:hidden;background:linear-gradient(160deg,#0b1220,#141d33 60%,#0a101d);border:1px solid var(--bd)}
+.gd{position:absolute;inset:0;background:linear-gradient(#ffffff08 1px,transparent 1px) 0 0/100% 28px,linear-gradient(90deg,#ffffff08 1px,transparent 1px) 0 0/40px 100%}
+.bx{position:absolute;width:9%;height:38%;border:1.5px solid var(--cy);border-radius:4px;background:#22d3ee10;animation:dr var(--d) ease-in-out infinite alternate}
+.bx em{position:absolute;top:-16px;left:-1px;font:600 10px monospace;background:var(--cy);color:#001;padding:1px 4px;border-radius:3px;white-space:nowrap}
+.vid.hot .tg{border-color:var(--rd);background:#f43f5e18;box-shadow:0 0 18px #f43f5e66}.vid.hot .tg em{background:var(--rd);color:#fff}
+@keyframes dr{to{transform:translate(70%,12%)}}
+.tag{position:absolute;left:10px;bottom:8px;font:600 10px monospace;background:#000a;padding:3px 7px;border-radius:5px;color:var(--am)}
+.rec{position:absolute;right:10px;top:8px;font:600 10px monospace;color:var(--rd)}
+.cams{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.cc{cursor:pointer;display:grid;gap:5px}
+input[type=range]{flex:1;accent-color:var(--cy)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div class="app"><nav><div class="logo"><i></i><span>SentinelOps</span></div><div id="nl"></div>
+<div class="sys"><div><span class="dot"></span><b style="color:var(--gr)">SYSTEM ONLINE</b></div><div>Active cameras: 47 / 48</div><div>Last sync: <span class="sy">--</span></div><div>Sep 29, 2026 · <span class="sy">--</span></div></div></nav>
+<div class="mn"><header class="top"><input id="q" placeholder="Search Person ID, camera, incident, location, type…" oninput="sq(this.value)"><span class="chip on" style="color:var(--am)">DEMO MODE</span><span class="chip" id="dm" onclick="tgDemo()"></span><span class="chip" onclick="bell()">🔔 <b id="bc">0</b></span></header>
+<div id="np" class="card"></div><main id="main"></main></div></div>
+<div id="m" class="ov" onclick="if(event.target==this)closeM()"><div id="mb" class="md"></div></div><div id="ts"></div>
+<script>
+const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0');
+const COL={CRITICAL:'var(--rd)',HIGH:'var(--or)',MEDIUM:'var(--am)',LOW:'var(--bl)'},H={cy:'#22d3ee',am:'#fbbf24',or:'#fb923c',rd:'#f43f5e',gr:'#34d399',bl:'#818cf8'};
+const SS=['New','Under Review','Investigating','Confirmed','False Positive','Resolved'];
+const bd=(s,c)=>`<span class="b" style="--c:${c||COL[s]||'var(--gr)'}">${s}</span>`;
+const S={v:'overview',q:'',sev:'ALL',stf:'ALL',demo:true,pt:-30,ppl:8426,n:483,i:0,sus:0};
+const T0=Date.now(),D0=new Date(2026,8,29,18,42,16).getTime();
+const clk=()=>{const d=new Date(D0+Date.now()-T0);return pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds())};
+const ZN=['Main Entrance','Hall A','Hall B','Hall C','Food Court','VIP Area','Exhibition Booths','Emergency Exit','Parking Entrance'];
+const ZR=[[40,300,150,90],[210,40,200,130],[430,40,200,130],[650,40,200,130],[210,190,200,100],[430,190,200,100],[650,190,200,100],[210,310,200,80],[430,310,420,80]];
+const ZO={1:0,9:1,17:2,24:3,31:5},cnt=Array(9).fill(0);
+const SP={1:'Normal crowd movement',9:'Possible theft alert',17:'Weapon detection alert',24:'Packet loss rising',31:'Restricted area access',38:'Link down'};
+const C=Array.from({length:48},(_,i)=>{const n=i+1,z=ZO[n]!==undefined?ZO[n]:i%9,k=cnt[z]++,r=ZR[z];
+return{id:'CAM-'+pad(n),loc:n==9?'Hall A — Booth 24':n==17?'Hall B — Entrance':ZN[z],x:r[0]+r[2]*(.18+.32*(k%3)),y:r[1]+r[3]*(.35+.25*Math.min(2,k/3|0)),st:n==24?'DEGRADED':n==38?'OFFLINE':'ONLINE',h:n==38?0:{1:99,17:96,24:64,31:98}[n]||90+(n*7)%10,ev:SP[n]||'Normal activity',lat:12+(n*5)%20,net:n==24?'Packet loss 4.2%':n==38?'No link':'Stable',chk:'18:'+pad(30+n%12)}});
+let A=[['00482','CRITICAL','Possible weapon detected','P-10482','CAM-17','Hall B — Entrance','18:42:16','Investigating',94,'OPR-02'],['00481','HIGH','Restricted area access detected','P-12091','CAM-31','VIP Area','18:31:08','New',88,'OPR-01'],['00480','MEDIUM','Possible theft detected','P-08321','CAM-09','Hall A — Booth 24','18:37:42','Under Review',81,'OPR-03'],['00479','MEDIUM','Suspicious behavior','P-07750','CAM-01','Main Entrance','18:15:30','Investigating',76,'OPR-04'],['00478','HIGH','Restricted item detected','P-11420','CAM-03','Hall B','18:09:12','Confirmed',91,'OPR-01'],['00477','LOW','Abandoned object','P-09977','CAM-05','Food Court','18:22:51','Resolved',72,'OPR-03'],['00476','LOW','Crowd density threshold','P-13005','CAM-22','Hall C','18:41:00','New',69,'OPR-02'],['00475','MEDIUM','Unattended baggage','P-12888','CAM-07','Exhibition Booths','18:12:44','New',74,'OPR-04']].map(a=>({id:'INC-2026-'+a[0],sev:a[1],type:a[2],pid:a[3],cam:a[4],loc:a[5],t:a[6],st:a[7],conf:a[8],op:a[9]}));
+const P=[['P-10482','18:21','18:42','Hall B','CAM-17','Suspicious — weapon indicator','CRITICAL','Investigating'],['P-08321','17:52','18:37','Hall A — Booth 24','CAM-09','Possible theft','MEDIUM','Under Review'],['P-12091','18:05','18:31','VIP Area','CAM-31','Restricted access','HIGH','New'],['P-07750','17:40','18:15','Main Entrance','CAM-01','Loitering','MEDIUM','Investigating'],['P-09977','18:10','18:22','Food Court','CAM-05','Abandoned object','LOW','Resolved'],['P-11420','18:02','18:09','Hall B','CAM-03','Restricted item','HIGH','Confirmed'],['P-13005','18:30','18:41','Hall C','CAM-22','Normal','LOW','Tracking'],['P-12888','18:12','18:40','Exhibition Booths','CAM-07','Unattended bag','MEDIUM','New']];
+let L=[['18:40:12','Possible DDoS attack','CAM-17','192.168.10.45','4.8 Gbps','HIGH','Mitigating'],['18:36:50','Repeated failed login attempts','CAM-09','10.20.4.117','27 attempts / 2 min','MEDIUM','Blocked'],['18:33:21','Firmware integrity warning','CAM-24','—','Hash mismatch','HIGH','Investigating'],['18:29:05','Suspicious API requests','VMS-API','172.16.8.203','1.2k req/min','MEDIUM','Rate limited'],['18:24:40','Camera disconnected','CAM-38','—','Link down','HIGH','Open'],['18:18:12','Unusual bandwidth usage','CAM-12','—','+310% vs baseline','LOW','Monitoring'],['18:11:33','Authentication failure','NVR-02','192.168.10.88','3 attempts','LOW','Closed']].map(a=>({t:a[0],ev:a[1],tg:a[2],src:a[3],x:a[4],sev:a[5],st:a[6]}));
+let E=[['18:42:16','CAM-17','Possible weapon detected','P-10482','CRITICAL'],['18:40:12','CAM-17','Possible DDoS attack','','HIGH'],['18:37:42','CAM-09','Possible theft detected','P-08321','MEDIUM'],['18:31:08','CAM-31','Restricted area access','P-12091','HIGH'],['18:29:40','CAM-24','Packet loss trending up','','LOW'],['18:26:02','CAM-01','Normal crowd movement','','LOW']].map(a=>({t:a[0],cam:a[1],x:a[2],p:a[3],s:a[4]}));
+let N=[{s:'CRITICAL',x:'Possible weapon detected — CAM-17, Hall B Entrance',t:'18:42:16',u:1},{s:'HIGH',x:'Cyber: Possible DDoS attack on CAM-17',t:'18:40:12',u:1},{s:'MEDIUM',x:'Predictive: CAM-24 may fail in ~10 min',t:'18:39:00',u:1},{s:'HIGH',x:'Restricted area access — VIP Area',t:'18:31:08',u:0}];
+const SC=[{k:'p',s:'MEDIUM',x:'Suspicious behavior detected',p:'P-11207',c:'CAM-12'},{k:'p',s:'CRITICAL',x:'Possible weapon detected',p:'P-13311',c:'CAM-22'},{k:'c',s:'HIGH',x:'Abnormal network traffic',c:'CAM-22',y:'2.1 Gbps'},{k:'m',s:'MEDIUM',x:'CAM-24 may fail in ~8 minutes',c:'CAM-24'},{k:'p',s:'HIGH',x:'Restricted area access detected',p:'P-12777',c:'CAM-44'},{k:'c',s:'MEDIUM',x:'Repeated failed login attempts',c:'NVR-01',y:'19 attempts'},{k:'p',s:'MEDIUM',x:'Possible theft detected',p:'P-13402',c:'CAM-27'}];
+const act_=a=>!['Resolved','False Positive'].includes(a.st);
+const m=o=>!S.q||JSON.stringify(o).toLowerCase().includes(S.q.toLowerCase());
+const fa=l=>l.filter(a=>m(a)&&(S.sev=='ALL'||a.sev==S.sev)&&(S.stf=='ALL'||a.st==S.stf));
+const opt=(l,v)=>l.map(o=>`<option ${v==o?'selected':''}>${o}</option>`).join('');
+const flt=()=>`<div class="fl"><select onchange="S.sev=this.value;render()">${opt(['ALL','CRITICAL','HIGH','MEDIUM','LOW'],S.sev)}</select><select onchange="S.stf=this.value;render()">${opt(['ALL',...SS],S.stf)}</select><span class="chip">Date: Sep 29, 2026</span></div>`;
+const sel=a=>`<select onchange="setSt('${a.id}',this.value)">${opt(SS,a.st)}</select>`;
+const cc=c=>{if(c.st=='OFFLINE')return'var(--mu)';const a=A.filter(x=>x.cam==c.id&&act_(x));return a.some(x=>x.sev=='CRITICAL')?'var(--rd)':(a.length||c.st=='DEGRADED')?'var(--am)':'var(--gr)'};
+const arow=a=>`<div class="al ${a.sev=='CRITICAL'&&act_(a)?'cr':''}" style="--c:${COL[a.sev]}" onclick="openAlert('${a.id}')"><div class="ab"></div><div><div class="am"><b>${a.type}</b>${bd(a.sev)}${bd(a.st,'var(--cy)')}</div><div class="mu" style="font-size:12px">${a.pid} · ${a.cam} · ${a.loc} · Sep 29, ${a.t}<br>AI analytics flagged this event, confidence ${a.conf}%. Video evidence available.</div></div><span class="mu">▶ Evidence</span></div>`;
+const scene=(hot,lab,id,p)=>`<div class="vid ${hot?'hot':''}" ${id?`id="${id}"`:''}><i class="gd"></i><div class="bx" style="left:16%;top:42%;--d:7s"><em>P-08321</em></div><div class="bx tg" style="left:50%;top:48%;--d:5s"><em>${p||'P-10482'}</em></div><div class="bx" style="left:74%;top:34%;--d:9s"><em>P-12091</em></div><span class="tag">${lab}</span><span class="rec">● REC</span></div>`;
+const ramp=(a,b,n=24)=>Array.from({length:n},(_,i)=>a+(b-a)*(i/(n-1))**1.6+Math.sin(i*1.7)*Math.abs(b-a)*.04);
+const sp=(a,c)=>{const mn=Math.min(...a),mx=Math.max(...a),p=a.map((v,i)=>`${i*200/(a.length-1)},${54-(v-mn)/(mx-mn||1)*48}`).join(' ');return`<svg viewBox="0 0 200 60" width="100%" height="70" preserveAspectRatio="none"><polyline points="0,60 ${p} 200,60" style="fill:${c};fill-opacity:.14"/><polyline points="${p}" fill="none" stroke="${c}" stroke-width="2"/></svg>`};
+const spark=(a,c,l,u)=>`<div class="card"><div class="mu">${l}</div><b class="big" style="color:${c}">${a[a.length-1].toFixed(1)}${u}</b>${sp(a,c)}</div>`;
+const hbars=(d)=>{const mx=Math.max(...d.map(x=>x[1]));return d.map(x=>`<div class="hb"><span>${x[0]}</span><div class="tk"><i style="width:${x[1]/mx*100}%;--c:${x[2]}"></i></div><b>${x[1]}</b></div>`).join('')};
+const vb=(a,l,c)=>{const mx=Math.max(...a),w=284/a.length;return`<svg viewBox="0 0 300 130" width="100%">${a.map((v,i)=>{const h=v/mx*90,x=8+i*w;return`<g class="vb"><rect x="${x}" y="${105-h}" width="${w-8}" height="${h}" rx="4" fill="${c}"><title>${l[i]}:00 — ${v}</title></rect><text x="${x+(w-8)/2}" y="122" fill="#7f8db0" font-size="9" text-anchor="middle">${l[i]}</text></g>`}).join('')}</svg>`};
+const donut=d=>{let o=0;const t=d.reduce((s,x)=>s+x[1],0);return`<svg viewBox="0 0 120 120" width="140">${d.map(x=>{const l=x[1]/t*314;const r=`<circle r="50" cx="60" cy="60" fill="none" stroke="${x[2]}" stroke-width="16" stroke-dasharray="${l} ${314-l}" stroke-dashoffset="${-o}" transform="rotate(-90 60 60)"><title>${x[0]}: ${x[1]}</title></circle>`;o+=l;return r}).join('')}<text x="60" y="66" text-anchor="middle" fill="#e6ecf8" font-size="20" font-weight="700">${t}</text></svg>`};
+const stat=(l,v,s,c)=>`<div class="card" style="border-top:2px solid ${c}"><span class="mu">${l}</span><b class="big">${v}</b><span class="mu" style="font-size:12px">${s}</span></div>`;
+const map=()=>`<svg viewBox="0 0 900 420" width="100%">${ZR.map((r,i)=>`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="14" fill="#0f1a30" stroke="#22304f"/><text x="${r[0]+12}" y="${r[1]+20}" fill="#7f8db0" font-size="11">${ZN[i]}</text>`).join('')}${C.map(c=>{const k=cc(c);return`<g onclick="openCam('${c.id}')" style="cursor:pointer">${k=='var(--rd)'?`<circle class="pr" cx="${c.x}" cy="${c.y}" r="7" style="fill:var(--rd)"/>`:''}<circle cx="${c.x}" cy="${c.y}" r="6" style="fill:${k}" stroke="#070b14" stroke-width="2"><title>${c.id} · ${c.loc}</title></circle></g>`}).join('')}</svg><div class="mu am" style="font-size:12px"><span>● <span style="color:var(--gr)">Normal</span></span><span>● <span style="color:var(--am)">Suspicious / degraded</span></span><span>● <span style="color:var(--rd)">Critical</span></span><span>Click a camera for details</span></div>`;
+const V={
+overview(){const ac=A.filter(act_),cr=ac.filter(a=>a.sev=='CRITICAL'),t=cr[0],r=[['Active Cameras','48','46 online · 1 degraded · 1 offline',H.cy],['People Detected Today',S.ppl.toLocaleString(),'Anonymous IDs only',H.bl],['Active Alerts',ac.length,'Across 9 zones',H.or],['Critical Incidents',cr.length,cr.length?'Needs operator action':'None open',H.rd],['Suspicious Activities',12+S.sus,'Last 24 hours',H.am],['System Health','98.7%','2 cyber events open',H.gr]];
+return`<div><h1>Security Overview</h1><div class="mu">Hall B is the current focus. Live status for the whole venue, demo data only.</div></div>${t?`<div class="al cr" style="--c:var(--rd)" onclick="openAlert('${t.id}')"><div class="ab"></div><div><div class="am"><b style="font-size:16px">${t.type}</b>${bd('CRITICAL')}${bd(t.st,'var(--cy)')}</div><div class="mu">${t.pid} · ${t.cam} · ${t.loc} · ${t.t} · confidence ${t.conf}% · video evidence ready</div></div><button class="btn">Review evidence</button></div>`:''}
+<div class="g st">${r.map(x=>stat(...x,x[3])).join('')}</div>
+<div class="g two"><div class="card"><h2>Venue security map</h2>${map()}</div><div class="card"><h2>Live event feed</h2>${E.slice(0,9).map((e,i)=>`<div class="ev ${S.fresh&&!i?'nw':''}"><span class="mu" style="font-family:monospace;font-size:12px">${e.t}</span><div><b>${e.x}</b> ${bd(e.s=='LOW'?'INFO':e.s,COL[e.s])}<div class="mu" style="font-size:12px">${e.cam}${e.p?' · Person '+e.p:''}</div></div></div>`).join('')}</div></div>
+<div class="g st"><div class="card"><h2>Is the system secure?</h2><span class="mu">1 DDoS being mitigated on CAM-17, 1 firmware warning on CAM-24.</span></div><div class="card"><h2>Predicted failure</h2><span class="mu">CAM-24 · Hall C · about 10 min</span></div><div class="card"><h2>Evidence</h2><span class="mu">${A.length} incidents with 30 s before/after clips.</span></div></div>`},
+alerts(){return`<h1>Security Alerts</h1>${flt()}<div class="g">${fa(A).map(arow).join('')||'<div class="mu">No alerts match. Clear the search or filters.</div>'}</div>`},
+live(){return`<h1>Live Monitoring</h1><div class="g" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${['CAM-17','CAM-09','CAM-31','CAM-01','CAM-24','CAM-12'].map(id=>{const c=C.find(x=>x.id==id);return`<div onclick="openCam('${id}')" style="cursor:pointer">${scene(id=='CAM-17',id+' · '+c.loc+' · SIMULATED')}</div>`}).join('')}</div>`},
+people(){return`<h1>People Tracking</h1><div class="card tw"><table><tr><th>Person ID</th><th>First seen</th><th>Last seen</th><th>Location</th><th>Camera</th><th>Activity</th><th>Risk</th><th>Status</th></tr>${P.filter(m).map(p=>`<tr class="r" onclick="openPerson('${p[0]}')"><td style="color:var(--cy);font-weight:600">${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td><td>${p[3]}</td><td>${p[4]}</td><td>${p[5]}</td><td>${bd(p[6])}</td><td>${p[7]}</td></tr>`).join('')}</table></div>`},
+cams(){return`<h1>Cameras</h1><div class="g cams">${C.filter(m).map(c=>{const k=c.st=='ONLINE'?'var(--gr)':c.st=='DEGRADED'?'var(--am)':'var(--rd)';return`<div class="card cc" onclick="openCam('${c.id}')"><div class="am"><b>${c.id}</b>${bd(c.st,k)}</div><div>${c.loc}</div><div class="mu" style="font-size:12px">Health ${c.h}% · ${c.net} · Checked ${c.chk}<br>Last event: ${c.ev}</div><div class="tk"><i style="width:${c.h}%;--c:${k}"></i></div></div>`}).join('')}</div>`},
+inc(){const l=fa(A);return`<h1>Incident Management</h1>${flt()}`+['CRITICAL','HIGH','MEDIUM','LOW'].map(s=>{const x=l.filter(a=>a.sev==s);return x.length?`<div><h2 style="color:${COL[s]}">${s} · ${x.length}</h2><div class="g" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${x.map(a=>`<div class="card" style="border-left:3px solid ${COL[s]}"><div class="am"><b>${a.id}</b>${bd(a.sev)}</div><div style="margin:6px 0"><b>${a.type}</b></div><div class="mu" style="font-size:12px">${a.pid} · ${a.cam} · ${a.loc}<br>${a.t} · Assigned to ${a.op}</div><div class="am" style="margin-top:10px">${sel(a)}<button class="btn o" onclick="openAlert('${a.id}')">Open</button></div></div>`).join('')}</div></div>`:''}).join('')},
+evid(){return`<h1>Video Evidence</h1><div class="g" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">${A.filter(m).slice(0,9).map(a=>`<div onclick="openAlert('${a.id}')" style="cursor:pointer">${scene(a.sev=='CRITICAL','SIMULATED VIDEO EVIDENCE',0,a.pid)}<div style="margin-top:6px"><b>${a.id}</b> <span class="mu">${a.type}</span></div></div>`).join('')}</div>`},
+cyber(){return`<h1>Cybersecurity Logs</h1><div class="mu">Simulated events on camera network infrastructure. No real attacks are performed.</div><div class="card tw"><table><tr><th>Time</th><th>Event</th><th>Target</th><th>Source</th><th>Traffic / detail</th><th>Severity</th><th>Status</th></tr>${L.filter(m).map(l=>`<tr><td>${l.t}</td><td><b>${l.ev}</b></td><td>${l.tg}</td><td>${l.src}</td><td>${l.x}</td><td>${bd(l.sev)}</td><td>${l.st}</td></tr>`).join('')}</table></div>`},
+health(){const q=[['Cameras',98.7],['Network',99.1],['Storage',94.2],['AI analytics',97.5],['Video management',99.6]];
+return`<h1>System Health & Predictive Maintenance</h1><div class="card" style="border-color:#fbbf2466;background:linear-gradient(180deg,#2a2110,#0d1424)"><div class="am"><b style="font-size:16px">CAM-24 may fail in about 10 minutes</b>${bd('PREDICTED FAILURE','var(--am)')}</div><div class="kv" style="margin-top:12px"><div><small>Camera</small>CAM-24</div><div><small>Location</small>Hall C</div><div><small>Current health</small>64%</div><div><small>Estimated time</small>~10 minutes</div><div><small>Reason</small>Rising packet loss + abnormal temperature</div></div></div>
+<div class="g st">${spark(ramp(20,140),H.cy,'Network latency','ms')}${spark(ramp(.2,6),H.am,'Packet loss','%')}${spark(ramp(52,81),H.or,'CPU temperature','°C')}${spark(ramp(96,64),H.rd,'Camera health','%')}</div><div class="card"><h2>Subsystem health</h2>${hbars(q.map(x=>[x[0],x[1],H.gr]))}</div>`},
+ana(){const h=['10','11','12','13','14','15','16','17','18'];return`<h1>Security Analytics</h1><div class="g" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+<div class="card"><h2>Alerts by severity</h2><div class="am">${donut([['Critical',3,H.rd],['High',14,H.or],['Medium',27,H.am],['Low',38,H.bl]])}<div class="mu">Critical 3<br>High 14<br>Medium 27<br>Low 38</div></div></div>
+<div class="card"><h2>Incidents by type</h2>${hbars([['Weapon',3,H.rd],['Theft',9,H.or],['Restricted area',14,H.am],['Suspicious behavior',12,H.am],['Cybersecurity',21,H.cy],['Camera failure',4,H.bl]])}</div>
+<div class="card"><h2>Alerts over time</h2>${sp([4,6,5,9,12,10,14,17,21],H.cy)}<div class="mu" style="font-size:12px">10:00 → 18:00</div></div>
+<div class="card"><h2>People detected per hour</h2>${vb([420,780,1100,1350,1280,1010,1190,960,690],h,H.bl)}</div>
+<div class="card"><h2>Suspicious activities</h2>${vb([1,0,2,1,3,1,2,1,4],h,H.am)}</div>
+<div class="card"><h2>Cybersecurity events</h2>${hbars([['Failed logins',9,H.am],['Abnormal traffic',6,H.or],['DDoS',2,H.rd],['Firmware',2,H.or],['API abuse',4,H.bl]])}</div>
+<div class="card"><h2>Confirmed vs false positives</h2><div class="hb"><span>Weapon</span><div class="tk"><i style="width:60%;--c:var(--gr)"></i><i style="width:40%;--c:var(--or)"></i></div><b>3/2</b></div><div class="hb"><span>Theft</span><div class="tk"><i style="width:70%;--c:var(--gr)"></i><i style="width:30%;--c:var(--or)"></i></div><b>7/3</b></div><div class="hb"><span>Restricted</span><div class="tk"><i style="width:85%;--c:var(--gr)"></i><i style="width:15%;--c:var(--or)"></i></div><b>11/2</b></div><div class="mu" style="font-size:12px">Green confirmed · orange false positive</div></div>
+<div class="card"><h2>Camera health</h2>${hbars([['Healthy',46,H.gr],['Degraded',1,H.am],['Offline',1,H.rd]])}</div></div>`},
+set(){return`<h1>Settings</h1><div class="card g"><label class="am"><input type="checkbox" ${S.demo?'checked':''} onchange="tgDemo()"> Demo simulation</label><label class="am"><input type="checkbox" checked> Open critical alerts automatically</label><label class="am"><input type="checkbox" checked disabled> Person IDs are temporary and anonymous</label><span class="mu">All detections, feeds and logs on this page are simulated.</span></div>`}};
+const NAV=[['overview','Overview','◫'],['live','Live Monitoring','▶'],['alerts','Security Alerts','⚠'],['people','People Tracking','☰'],['cams','Cameras','◉'],['inc','Incidents','⛨'],['evid','Video Evidence','▣'],['cyber','Cybersecurity Logs','⌗'],['health','System Health','♥'],['ana','Analytics','▤'],['set','Settings','⚙']];
+function render(){$('#nl').innerHTML=NAV.map(n=>`<a class="${S.v==n[0]?'on':''}" onclick="go('${n[0]}')"><b>${n[2]}</b><span>${n[1]}</span></a>`).join('');$('#main').innerHTML=V[S.v]();$('#dm').textContent='Demo Simulation: '+(S.demo?'ON':'OFF');$('#dm').className='chip'+(S.demo?' on':'');S.fresh=0}
+function go(v){S.v=v;S.q='';$('#q').value='';S.sev=S.stf='ALL';render();scrollTo(0,0)}
+function sq(v){S.q=v;if(v&&!['alerts','people','cams','inc','cyber'].includes(S.v))S.v='alerts';render()}
+function tgDemo(){S.demo=!S.demo;render();toast('Demo simulation '+(S.demo?'on':'off'))}
+function toast(t){const d=document.createElement('div');d.textContent=t;$('#ts').append(d);setTimeout(()=>d.remove(),2600)}
+function openM(h,c){$('#mb').className='md '+(c||'');$('#mb').innerHTML=h;$('#m').classList.add('on')}
+let vp=0;function closeM(){clearInterval(vp);vp=0;$('#m').classList.remove('on')}
+const WF=['Detection','Alert generated','Operator review','Video verification','Confirmed / false positive','Response','Resolved'],WI={New:1,'Under Review':2,Investigating:3,Confirmed:4,'False Positive':4,Resolved:6};
+function setSt(id,v){const a=A.find(x=>x.id==id);a.st=v;toast(id+' set to '+v);if($('#m').classList.contains('on')&&$('#rg'))openAlert(id);render()}
+function openAlert(id){const a=A.find(x=>x.id==id),x=WI[a.st];S.pt=-30;clearInterval(vp);vp=0;
+openM(`<div><button class="x" onclick="closeM()">×</button><div class="am"><h1>${a.id}</h1>${bd(a.sev)}</div><div class="mu">${a.type}</div></div>
+<div class="kv"><div><small>Person ID</small><a style="color:var(--cy);cursor:pointer" onclick="openPerson('${a.pid}')">${a.pid}</a></div><div><small>Camera</small><a style="color:var(--cy);cursor:pointer" onclick="openCam('${a.cam}')">${a.cam}</a></div><div><small>Location</small>${a.loc}</div><div><small>Date</small>September 29, 2026</div><div><small>Time</small>${a.t}</div><div><small>Type</small>${a.type}</div><div><small>Confidence</small>${a.conf}%</div><div><small>Status</small>${sel(a)}</div></div>
+<div class="wf">${WF.map((w,i)=>`<div class="${i<x||(i==x&&x==6)?'d':i==x?'a':''}">${w}</div>`).join('')}</div>
+<div>${scene(false,'SIMULATED VIDEO EVIDENCE','ev',a.pid)}<div class="am" style="margin-top:8px"><button class="btn" id="pl" onclick="play()">▶</button><input type="range" id="rg" min="-30" max="30" step="0.5" value="-30" oninput="S.pt=+this.value;fr()"><button class="btn o" onclick="this.textContent=this.textContent=='🔊'?'🔇':'🔊'">🔊</button><button class="btn o" onclick="try{$('#ev').requestFullscreen()}catch(e){}">⛶</button></div><div class="am" style="justify-content:space-between;font-size:11px;color:var(--mu);margin-top:4px"><span>-30s</span><span>-20s</span><span>-10s</span><b style="color:var(--rd)">INCIDENT</b><span>+10s</span><span>+20s</span><span>+30s</span></div><div id="cp" class="mu" style="margin-top:4px">30 seconds BEFORE incident</div></div>
+<div class="am"><button class="btn" onclick="toast('Full evidence view opened (demo)')">Open Full Evidence</button><button class="btn o" onclick="toast('Incident report generated (demo)')">Download Incident Report</button></div>`)}
+function fr(){const r=$('#rg');if(!r)return;r.value=S.pt;const t=S.pt;$('#ev').classList.toggle('hot',Math.abs(t)<=5);$('#cp').textContent=t==0?'INCIDENT':t<0?(-t)+' seconds BEFORE incident':t+' seconds AFTER incident'}
+function play(){if(vp){clearInterval(vp);vp=0}else{if(S.pt>=30)S.pt=-30;vp=setInterval(()=>{S.pt=Math.min(30,S.pt+.5);fr();if(S.pt>=30)play()},100)}$('#pl').textContent=vp?'❚❚':'▶'}
+function openCam(id){const c=C.find(x=>x.id==id);if(!c)return toast(id+' is not a camera');const al=A.filter(a=>a.cam==id);
+openM(`<div><button class="x" onclick="closeM()">×</button><h1>${c.id} · ${c.loc}</h1></div>${scene(al.some(a=>a.sev=='CRITICAL'&&act_(a)),'LIVE DEMO FEED — SIMULATED')}<div class="kv"><div><small>Status</small>${c.st}</div><div><small>Health</small>${c.h}%</div><div><small>Network</small>${c.net}</div><div><small>Latency</small>${c.lat} ms</div><div><small>Last check</small>${c.chk}</div><div><small>Last event</small>${c.ev}</div></div>${al.map(arow).join('')}`)}
+function openPerson(id){const a=A.find(x=>x.pid==id),p=P.find(x=>x[0]==id)||(a&&[id,a.t,a.t,a.loc,a.cam,a.type,a.sev,'New']);if(!p)return toast('No profile for '+id);
+const mn=s=>+s.slice(0,2)*60+ +s.slice(3,5),f=n=>pad(n/60|0)+':'+pad(n%60),al=A.filter(x=>x.pid==id);
+openM(`<div><button class="x" onclick="closeM()">×</button><div class="am"><h1>${p[0]}</h1>${bd(p[6])}</div><div class="mu">Temporary anonymous ID · no personal data</div></div><div class="kv"><div><small>Current location</small>${p[3]}</div><div><small>Last camera</small>${p[4]}</div><div><small>Status</small>${p[7]}</div><div><small>Activity</small>${p[5]}</div></div>
+<div><h2>Movement timeline</h2><div class="tl"><div><b>${p[1]}</b> CAM-01 · Main Entrance<br><span class="mu">Entered venue</span></div><div><b>${f((mn(p[1])+mn(p[2]))/2|0)}</b> CAM-12 · Hall corridor<br><span class="mu">Movement tracked</span></div><div><b>${p[2]}</b> ${p[4]} · ${p[3]}<br><span class="mu">${p[5]}</span></div></div></div><div><h2>Associated alerts</h2><div class="g">${al.map(arow).join('')||'<span class="mu">None</span>'}</div></div>`,'dr')}
+function tick(){if(!S.demo)return;const e=SC[S.i++%SC.length],t=clk(),c=C.find(x=>x.id==e.c);
+if(e.k=='p'){A.unshift({id:'INC-2026-00'+(S.n++),sev:e.s,type:e.x,pid:e.p,cam:e.c,loc:c?c.loc:'Venue',t,st:'New',conf:80+Math.floor(Math.random()*18),op:'OPR-0'+(1+S.n%4)});if(A.length>24)A.pop();if(e.s=='MEDIUM')S.sus++}
+else if(e.k=='c')L.unshift({t,ev:e.x,tg:e.c,src:'10.20.'+(S.n%9)+'.'+(20+S.n%200),x:e.y,sev:e.s,st:'Mitigating'});
+E.unshift({t,cam:e.c,x:e.x,p:e.p||'',s:e.s});N.unshift({s:e.s,x:(e.k=='c'?'Cyber: ':e.k=='m'?'Predictive: ':'')+e.x+' — '+e.c,t,u:1});S.fresh=1;S.ppl+=Math.floor(Math.random()*9);
+if(['overview','alerts','cyber'].includes(S.v)&&!S.q)render();renderN()}
+function renderN(){$('#bc').textContent=N.filter(n=>n.u).length;$('#np').innerHTML=N.slice(0,8).map(n=>`<div class="nt ${n.s=='CRITICAL'?'cr':''}" style="--c:${COL[n.s]}"><b>${n.x}</b><div class="mu">${n.t}</div></div>`).join('')}
+function bell(){const p=$('#np');p.classList.toggle('on');if(p.classList.contains('on')){renderN();N.forEach(n=>n.u=0);$('#bc').textContent=0}}
+setInterval(()=>document.querySelectorAll('.sy').forEach(e=>e.textContent=clk()),1000);
+render();renderN();setInterval(tick,6000);
+</script></body></html>

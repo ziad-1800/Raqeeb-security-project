@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "name": "Expo 2030 Riyadh",
+    "subtitle": "Camera placement plan",
+    "units": "meters",
+    "note": "Editable site geometry. Coordinates are [x, z] in meters from the site centre; x is east, z is south. Edit and refresh the page to see changes."
+  },
+  "ground": { "size": 2600, "grid": 200, "subGrid": 50 },
+  "boundary": [
+    [920, 0], [869.3, 316.4], [685.1, 574.9], [450, 779.4], [149.1, 845.6],
+    [-138.5, 785.4], [-430, 744.8], [-742.7, 623.2], [-882.2, 321.1], [-840, 0],
+    [-784.6, -285.6], [-663.1, -556.4], [-430, -744.8], [-156.5, -887.6],
+    [167.2, -947.9], [450, -779.4], [605.6, -508.3], [771.4, -280.6]
+  ],
+  "districts": [
+    { "id": "D1", "name": "Sustainability District", "center": [-360, -330], "radius": 300, "cell": 68, "height": 16, "heightVariance": 10, "seed": 11, "label": "Sustainability" },
+    { "id": "D2", "name": "Innovation District", "center": [430, -300], "radius": 260, "cell": 62, "height": 20, "heightVariance": 12, "seed": 23, "label": "Innovation" },
+    { "id": "D3", "name": "Collaboration District", "center": [-130, 470], "radius": 310, "cell": 70, "height": 15, "heightVariance": 9, "seed": 37, "label": "Collaboration" },
+    { "id": "D4", "name": "Mobility District", "center": [520, 330], "radius": 240, "cell": 60, "height": 18, "heightVariance": 11, "seed": 53, "label": "Mobility" }
+  ],
+  "landmarks": [
+    { "id": "central-dome", "type": "dome", "center": [0, 0], "radius": 118, "height": 94, "rings": 9, "segments": 36, "label": "Central Dome" },
+    { "id": "plaza-ring", "type": "ring", "center": [0, 0], "radius": 218, "height": 2, "segments": 64, "label": "Central Plaza" },
+    { "id": "gate-north", "type": "gate", "center": [-40, -850], "width": 96, "height": 36, "label": "North Gate" },
+    { "id": "gate-south", "type": "gate", "center": [90, 850], "width": 96, "height": 36, "label": "South Gate" },
+    { "id": "tower-east", "type": "tower", "center": [690, -180], "radius": 28, "height": 126, "label": "Observation Tower" },
+    { "id": "tower-west", "type": "tower", "center": [-690, 210], "radius": 24, "height": 104, "label": "West Tower" }
+  ],
+  "water": [
+    { "id": "oasis", "center": [-110, 190], "radius": 158, "wobble": 0.22, "segments": 44, "label": "Oasis" },
+    { "id": "canal-north", "center": [40, -470], "radius": 96, "wobble": 0.3, "segments": 32 },
+    { "id": "canal-east", "center": [560, 120], "radius": 84, "wobble": 0.28, "segments": 32 }
+  ],
+  "spines": [
+    { "id": "spine-main", "points": [[-40, -900], [-20, -540], [10, -180], [40, 120], [20, 450], [90, 900]], "width": 48, "label": "Green Spine" },
+    { "id": "spine-cross", "points": [[-880, 190], [-430, 150], [-20, 80], [380, -40], [880, -140]], "width": 38 }
+  ],
+  "cameras": [
+    { "id": "CAM-01", "name": "South Plaza", "pos": [-430, 11, 330], "yaw": 128, "pitch": -18, "fov": 72, "range": 400, "color": "#3ddc84" },
+    { "id": "CAM-02", "name": "North Gate", "pos": [-180, 11, -660], "yaw": 15, "pitch": -16, "fov": 66, "range": 330, "color": "#ff5470" },
+    { "id": "CAM-03", "name": "East Boulevard", "pos": [560, 11, 80], "yaw": 263, "pitch": -18, "fov": 62, "range": 340, "color": "#b06bff" },
+    { "id": "CAM-04", "name": "Innovation Cluster", "pos": [470, 11, -540], "yaw": 320, "pitch": -16, "fov": 60, "range": 280, "color": "#43d9ff" },
+    { "id": "CAM-05", "name": "West Promenade", "pos": [-740, 11, 150], "yaw": 100, "pitch": -16, "fov": 62, "range": 300, "color": "#ffc247" },
+    { "id": "CAM-06", "name": "Central Plaza", "pos": [60, 15, 40], "yaw": 243, "pitch": -24, "fov": 80, "range": 260, "color": "#4f8dff" }
+  ]
+}

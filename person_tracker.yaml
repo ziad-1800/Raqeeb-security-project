@@ -1,0 +1,13 @@
+# Appearance-assisted tracking for recorded security cameras.
+tracker_type: botsort
+track_high_thresh: 0.25
+track_low_thresh: 0.1
+new_track_thresh: 0.3
+track_buffer: 120
+match_thresh: 0.8
+fuse_score: True
+gmc_method: sparseOptFlow
+proximity_thresh: 0.0
+appearance_thresh: 0.9
+with_reid: True
+model: auto
